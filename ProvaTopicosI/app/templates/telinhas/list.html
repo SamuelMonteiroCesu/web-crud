@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Produto{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1>Lista de Produto</h1>
+    <!--Botão adicionar Produto-->
+    <a id= "add-link" href="addProduto/">
+        <div class="col-2 add-div">
+            <span><i class="fas fa-plus"></span></i>Adicionar Produto
+        </div>
+    </a>
+    <!--Fim do botão adicionar Produto-->
+
+    <!--Barra de pesquisa-->
+    <div class="col-9 search-div">
+        <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome do produto para buscar">
+        <i class="fas fa-search"></i>
+    </div>
+    <!--Fim da Barra de pesquisa-->
+    {% if messages %}
+        <ul class='messages'>
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{message.tags}}"{% endif %}>{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <!--Lista de produtos adicionados-->
+    <ul class="produto-list">
+        {% for app in apps %}
+        <li class="produto-item">
+            <span><a href="relat/{{app.id}}">{{app.nome}}</a></span>
+            <a href="deleteProduto/{{app.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+            <a href="editProduto/{{app.id}}"><span><i class="fas fa-edit"></i></span></a>
+        </li>
+        {% endfor %}
+    </ul>
+    <!--Paginação da lista-->
+    <div class="pagination">
+        <span class="step-links">
+            {% if apps.has_previous %}
+                <a href="?page={{ apps.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+            {% endif %}
+
+            <span class="current">
+                {{ apps.number }} de {{ apps.paginator.num_pages }}
+            </span>
+
+            {% if apps.has_next %}
+                <a href="?page={{ apps.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+            {% endif %}
+        </span>
+    </div>
+    <!--Fim da Lista de Produtos adicionados-->
+</div>
+{% endblock %}

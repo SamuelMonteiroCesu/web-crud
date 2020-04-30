@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Produtos{% endblock %}
+
+{% block content %}
+<!--Relatório de um Produto selecionado-->
+<div class="offset-1 col-10 list-div">
+    <h1>{{relat.nome}}</h1>
+    <p>{{relat.descricao}}</p>
+</div>
+{% endblock %}
